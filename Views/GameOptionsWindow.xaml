@@ -1,0 +1,180 @@
+﻿<Window x:Class="MemoryGame.Views.GameOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Options" Height="500" Width="600"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="AliceBlue">
+    <Window.Resources>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontFamily" Value="{StaticResource WaltographFont}"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Background" Value="CadetBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightBlue"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="SkyBlue"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="InitialPanel" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,20">
+            <TextBlock Text="Select Mode:" 
+                       FontSize="32" 
+                       FontFamily="{StaticResource WaltographFont}"
+                       FontWeight="Bold" 
+                       Foreground="Blue"
+                       HorizontalAlignment="Center" Margin="0,20,0,10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Standard"
+                        Width="150"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="InitialStandard_Click"/>
+                <Button Content="Custom"
+                        Width="150"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="InitialCustom_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="StandardPanel"
+                    Grid.Row="1"
+                    Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Select Time:"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="Blue"
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,5"/>
+            <Slider x:Name="TimeSlider"
+                    Minimum="30"
+                    Maximum="180"
+                    Value="90"
+                    TickFrequency="10"
+                    IsSnapToTickEnabled="True"
+                    Width="360"
+                    Margin="10,0"/>
+            <TextBlock Text="{Binding ElementName=TimeSlider, Path=Value, StringFormat='Selected Time: {0} seconds'}"
+                       FontSize="22"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="DarkBlue"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Villains"
+                        Width="140"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="StandardVillains_Click"/>
+                <Button Content="Princesses"
+                        Width="160"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="StandardPrincesses_Click"/>
+                <Button Content="Friends"
+                        Width="140"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Click="StandardFriends_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="CustomPanel"
+                    Grid.Row="1"
+                    Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Select Custom Time:" 
+                       FontSize="30" 
+                       FontWeight="Bold"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="Blue"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,5"/>
+            <Slider x:Name="CustomTimeSlider"
+                    Minimum="30"
+                    Maximum="180"
+                    Value="90"
+                    TickFrequency="10"
+                    IsSnapToTickEnabled="True"
+                    Width="360"
+                    Margin="10,0"/>
+            <TextBlock Text="{Binding ElementName=CustomTimeSlider, Path=Value, StringFormat='Selected Time: {0} seconds'}"
+                       FontSize="22"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="DarkBlue"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,10"/>
+            <TextBlock Text="Select number of rows:" 
+                       FontSize="30" 
+                       FontWeight="Bold"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="Blue"
+                       HorizontalAlignment="Center"
+                       Margin="10,10,0,5"/>
+            <Slider x:Name="RowsSlider"
+                    Minimum="2" 
+                    Maximum="6"
+                    Value="2"
+                    TickFrequency="2"
+                    IsSnapToTickEnabled="True"
+                    Width="360"
+                    Margin="10,0"/>
+            <TextBlock Text="{Binding ElementName=RowsSlider, Path=Value, StringFormat='Selected Rows: {0}'}"
+                       FontSize="22"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="DarkBlue"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,10"/>
+            <TextBlock Text="Select number of columns:" 
+                       FontSize="30" 
+                       FontWeight="Bold"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="Blue"
+                       HorizontalAlignment="Center"
+                       Margin="10,10,0,5"/>
+            <Slider x:Name="ColumnsSlider"
+                    Minimum="2" 
+                    Maximum="6"
+                    Value="2"
+                    TickFrequency="2"
+                    IsSnapToTickEnabled="True"
+                    Width="360"
+                    Margin="10,0"/>
+            <TextBlock Text="{Binding ElementName=ColumnsSlider, Path=Value, StringFormat='Selected Columns: {0}'}"
+                       FontSize="22"
+                       FontFamily="{StaticResource WaltographFont}"
+                       Foreground="DarkBlue"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,20"/>
+            <Button Content="Start"
+                    Width="150"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Click="CustomStart_Click"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

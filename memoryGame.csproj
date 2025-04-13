@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>bin\Debug\net8.0-windows\Resources\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\VillainsImages\10.jpg" />
+    <None Remove="Resources\waltograph\waltograph42.otf" />
+    <None Remove="Resources\waltograph\waltographUI.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0-windows\Resources\logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\VillainsImages\10.jpg" />
+    <Resource Include="Resources\waltograph\waltograph42.otf" />
+    <Resource Include="Resources\waltograph\waltographUI.ttf" />
+  </ItemGroup>
+
+</Project>

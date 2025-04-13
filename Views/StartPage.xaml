@@ -1,0 +1,99 @@
+﻿<Window x:Class="MemoryGame.Views.StartPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Memory Game" Height="800" Width="1000"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="AliceBlue">
+    <Window.Resources>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontFamily" Value="{StaticResource WaltographFont}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="CadetBlue"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="SkyBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="20">
+            <TextBlock Text="Memory Game" 
+                       FontSize="70" 
+                       FontFamily="{StaticResource WaltographFont}"
+                       FontWeight="Bold" 
+                       Foreground="DarkBlue" 
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Match the pairs and break a new record" 
+                       FontSize="35" 
+                       Foreground="Blue"
+                       FontFamily="{StaticResource WaltographFont}" 
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Grid.Column="0" 
+                     ItemsSource="{Binding Players}"
+                     SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"
+                     Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" 
+                                   FontSize="35" 
+                                   FontFamily="{StaticResource WaltographFont}"
+                                   Padding="5"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Border Grid.Column="1" Margin="10" BorderBrush="Gray" BorderThickness="1">
+                <Image Source="{Binding SelectedPlayer.ImagePath}" Stretch="Uniform"/>
+            </Border>
+        </Grid>
+
+
+        <UniformGrid Grid.Row="2" Columns="4" HorizontalAlignment="Center" Margin="20">
+            <Button Content="Add Player" 
+                    Command="{Binding AddPlayerCommand}" 
+                    Style="{StaticResource RoundedButtonStyle}" Width="155"/>
+            <Button Content="Delete Player" 
+                    Command="{Binding DeletePlayerCommand}" 
+                    Style="{StaticResource RoundedButtonStyle}" Width="165"/>
+            <Button Content="Start Game" Command="{Binding StartGameCommand}" 
+            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+            Style="{StaticResource RoundedButtonStyle}" Width="170"/>
+            <Button Content="Close Game" 
+                    Command="{Binding CloseGameCommand}" 
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Background="IndianRed"/>
+        </UniformGrid>
+    </Grid>
+</Window>
